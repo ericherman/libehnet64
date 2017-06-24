@@ -16,6 +16,12 @@ however, nothing for 64 bit. The header ehnet64.h #defines these:
        uint64_t ntoh64(uint64_t net64);
 
 
+(I elected *not* to name the functions "htonll" and "ntohll" because
+"long" and "long long" are the same on 64bit arch, and I think the 64 is
+less ambiguous. You may wish to '#define htonll hton64' and '#define
+ntohll ntoh64' in your code.)
+
+
 Usage
 -----
 
