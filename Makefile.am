@@ -1,5 +1,5 @@
 #Makefile.am
-#Copyright (C) 2016 Eric Herman <eric@freesa.org>
+#Copyright (C) 2017 Eric Herman <eric@freesa.org>
 #
 #This work is free software: you can redistribute it and/or modify it
 #under the terms of the GNU Lesser General Public License as published by
@@ -23,18 +23,14 @@ NOISY_CFLAGS=-Wall -Wextra -pedantic -Werror
 TESTS=$(check_PROGRAMS)
 check_PROGRAMS=test-ntoh64 test-hton64
 
-test_ntoh64_SOURCES=tests/test-ntoh64.c src/ehnet64.h
-test_hton64_SOURCES=tests/test-ntoh64.c src/ehnet64.h
+test_ntoh64_SOURCES=src/ehnet64.h tests/test-ntoh64.c
+test_hton64_SOURCES=src/ehnet64.h tests/test-ntoh64.c
 
 ACLOCAL_AMFLAGS=-I m4 --install
 
 EXTRA_DIST=COPYING.GPL3 misc
 
-AM_CFLAGS=$(CSTD_CFLAGS) \
- $(DEBUG_CFLAGS) \
- $(NOISY_CFLAGS) \
- $(ALLOCA_CFLAGS) \
- $(BACKTRACE_CFLAGS)
+AM_CFLAGS=$(CSTD_CFLAGS) $(DEBUG_CFLAGS) $(NOISY_CFLAGS)
 
 # extracted from https://github.com/torvalds/linux/blob/master/scripts/Lindent
 LINDENT=indent -npro -kr -i8 -ts8 -sob -l80 -ss -ncs -cp1 -il0
