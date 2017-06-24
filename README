@@ -28,8 +28,6 @@ Usage
 If using Autoconf, consider adding these to your configure.ac:
 
 AC_CHECK_HEADERS([byteswap.h endian.h stdint.h])
-AC_TYPE_UINT32_T
-AC_TYPE_UINT64_T
 AC_CHECK_FUNCS([bswap_32 bswap_64])
 
 If defining by hand, configure the following:

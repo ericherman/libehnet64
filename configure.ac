@@ -17,11 +17,6 @@ AC_PROG_LN_S
 # Checks for header files.
 AC_CHECK_HEADERS([byteswap.h endian.h stdint.h])
 
-# Checks for typedefs, structures, and compiler characteristics.
-AC_TYPE_UINT32_T
-AC_TYPE_UINT64_T
-AC_TYPE_SIZE_T
-
 # Checks for library functions.
 AC_CHECK_FUNCS([bswap_32 bswap_64])
 
