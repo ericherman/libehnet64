@@ -3,3 +3,5 @@
 	Initial version
 
 	* src/ehnet64.h: #define ntoh64(x) and hton64(x) macros
+	* tests/test-hton64.c: one simple hton64(x) test
+	* tests/test-ntoh64.c: one simple ntoh64(x) test
