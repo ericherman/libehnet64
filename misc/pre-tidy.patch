@@ -1,0 +1,25 @@
+--- orig/src/ehnet64.h
++++ tidy/src/ehnet64.h
+@@ -30,9 +30,11 @@
+ #ifndef EHNET64_H
+ #define EHNET64_H
+ 
++/*
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
++*/
+ 
+ #if HAVE_ENDIAN_H
+ #include <endian.h>
+@@ -74,8 +76,10 @@
+ 
+ #endif /* HAVE_ENDIAN_H */
+ 
++/*
+ #ifdef __cplusplus
+ }
+ #endif
++*/
+ 
+ #endif /* EHNET64_H */

@@ -60,3 +60,4 @@ test-driver
 m4/
 build-aux/
 .dirstamp
+.Tpo

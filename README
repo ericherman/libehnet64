@@ -1,0 +1,51 @@
+hton64 and ntoh64
+-----------------
+64-bit function to convert between network and host byte order
+
+The header arpa/inet.h declares:
+
+       uint32_t htonl(uint32_t host32);
+       uint32_t ntohl(uint32_t net32);
+
+       uint16_t htons(uint16_t host16);
+       uint16_t ntohs(uint16_t net16);
+
+however, nothing for 64 bit. The header ehnet64.h #defines these:
+
+       uint64_t hton64(uint64_t host64);
+       uint64_t ntoh64(uint64_t net64);
+
+
+Usage
+-----
+
+If using Autoconf, consider adding these to your configure.ac:
+
+AC_CHECK_HEADERS([byteswap.h endian.h stdint.h])
+AC_TYPE_UINT32_T
+AC_TYPE_UINT64_T
+AC_CHECK_FUNCS([bswap_32 bswap_64])
+
+If defining by hand, configure the following:
+#define HAVE_STDINT_H 1
+#define HAVE_ENDIAN_H 1
+#define HAVE_BYTESWAP_H 1
+#define HAVE_BSWAP_32 1
+#define HAVE_BSWAP_64 1
+
+Finally, #include "ehnet64.h" into your source in order to make use of
+the functions "hton64" and "ntoh64" in your program.
+
+
+Packaging
+---------
+autoreconf -iv &&
+ ./configure &&
+ make check &&
+ echo "Success."
+
+
+License
+-------
+GNU Lesser General Public License (LGPL), version 3 or later.
+See COPYING and COPYING.GPL3 for details.
