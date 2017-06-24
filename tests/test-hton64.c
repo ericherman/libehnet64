@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 
 	for (i = 0; i < 8; ++i) {
 		as_le.bytes[i] = ((val & (0xFFULL << (8 * i))) >> (8 * i));
-		as_be.bytes[7-i] = as_le.bytes[i];
+		as_be.bytes[7 - i] = as_le.bytes[i];
 	}
 
 	hostv = (as_be.n == val) ? as_be.n : as_le.n;
