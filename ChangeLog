@@ -1,0 +1,5 @@
+2017-06-24  Eric Herman <eric@freesa.org>
+
+	Initial version
+
+	* src/ehnet64.h: #define ntoh64(x) and hton64(x) macros
