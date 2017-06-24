@@ -24,7 +24,7 @@ TESTS=$(check_PROGRAMS)
 check_PROGRAMS=test-ntoh64 test-hton64
 
 test_ntoh64_SOURCES=src/ehnet64.h tests/test-ntoh64.c
-test_hton64_SOURCES=src/ehnet64.h tests/test-ntoh64.c
+test_hton64_SOURCES=src/ehnet64.h tests/test-hton64.c
 
 ACLOCAL_AMFLAGS=-I m4 --install
 

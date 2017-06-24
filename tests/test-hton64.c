@@ -22,25 +22,35 @@ License for more details.
 #include <stdlib.h>
 
 union endian_test_u {
-	uint8_t bytes[4];
-	uint32_t n;
+	uint8_t bytes[8];
+	uint64_t n;
 };
 
-int main(void)
+int main(int argc, char **argv)
 {
-	union endian_test_u et = { {0x11, 0x22, 0x33, 0x44} };
-	uint32_t value = 0x11 << 3 | 0x22 << 2 | 0x33 << 1 | 0x44;
-	int big_endian = (et.n == value);
-	uint64_t as_le = 0x554E49584C4F5645;
-	uint64_t as_be = 0x45564F4C58494E55;
-	uint64_t hostv = big_endian ? as_be : as_le;
-	uint64_t actual;
+	union endian_test_u as_le, as_be;
+	uint64_t val, hostv, actual;
+	size_t i;
+	char *end;
 
-	actual = ntoh64(as_be);
+	val = (argc > 1) ? strtoull(argv[1], &end, 10) : 0x1122334455667788UL;
 
-	if (actual != hostv) {
-		fprintf(stderr, "%0llx = hton64(%0llx)",
-			(unsigned long long)actual, (unsigned long long)as_be);
+	for (i = 0; i < 8; ++i) {
+		as_le.bytes[i] = ((val & (0xFFULL << (8 * i))) >> (8 * i));
+		fprintf(stderr, "as_le.bytes[%u]: %02x\n", i, as_le.bytes[i]);
+	}
+
+	for (i = 0; i < 8; ++i) {
+		as_be.bytes[i] = as_le.bytes[7 - i];
+	}
+
+	hostv = (as_be.n == val) ? as_be.n : as_le.n;
+	actual = hton64(hostv);
+
+	if (actual != as_be.n) {
+		fprintf(stderr, "%0llx = hton64(%0llx), expected: %0llx\n",
+			(unsigned long long)actual, (unsigned long long)hostv,
+			(unsigned long long)as_be.n);
 		return EXIT_FAILURE;
 	}
 
