@@ -33,18 +33,15 @@ int main(int argc, char **argv)
 	size_t i;
 	char *end;
 
-	val = (argc > 1) ? strtoull(argv[1], &end, 10) : 0x1122334455667788UL;
+	val = (argc > 1) ? strtoull(argv[1], &end, 10) : 0x1122334455667788ULL;
 
 	for (i = 0; i < 8; ++i) {
 		as_le.bytes[i] = ((val & (0xFFULL << (8 * i))) >> (8 * i));
-		fprintf(stderr, "as_le.bytes[%u]: %02x\n", i, as_le.bytes[i]);
-	}
-
-	for (i = 0; i < 8; ++i) {
-		as_be.bytes[i] = as_le.bytes[7 - i];
+		as_be.bytes[7-i] = as_le.bytes[i];
 	}
 
 	hostv = (as_be.n == val) ? as_be.n : as_le.n;
+
 	actual = hton64(hostv);
 
 	if (actual != as_be.n) {
