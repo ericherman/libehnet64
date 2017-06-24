@@ -22,7 +22,7 @@ License for more details.
 #include <stdlib.h>
 
 union endian_test_u {
-	unsigned char bytes[4];
+	uint8_t bytes[4];
 	uint32_t n;
 };
 
