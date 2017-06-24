@@ -41,12 +41,18 @@ Finally, #include "ehnet64.h" into your source in order to make use of
 the functions "hton64" and "ntoh64" in your program.
 
 
-Packaging
----------
+Building and Testing
+--------------------
 autoreconf -iv &&
  ./configure &&
  make check &&
  echo "Success."
+
+
+Packaging
+---------
+# and if you wish:
+make distcheck
 
 
 License
