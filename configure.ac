@@ -14,9 +14,6 @@ AC_USE_SYSTEM_EXTENSIONS
 AC_PROG_CC
 AC_PROG_LN_S
 
-# Checks for libraries.
-# AC_CHECK_LIB([gmp], [mpz_init])
-
 # Checks for header files.
 AC_CHECK_HEADERS([byteswap.h endian.h stdint.h])
 
@@ -26,8 +23,6 @@ AC_TYPE_UINT64_T
 AC_TYPE_SIZE_T
 
 # Checks for library functions.
-# AC_FUNC_MALLOC
-# AC_FUNC_ALLOCA
 AC_CHECK_FUNCS([bswap_32 bswap_64])
 
 AM_INIT_AUTOMAKE([subdir-objects -Werror -Wall])
