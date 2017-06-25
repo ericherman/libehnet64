@@ -10,7 +10,10 @@ The header arpa/inet.h declares:
        uint16_t htons(uint16_t host16);
        uint16_t ntohs(uint16_t net16);
 
-however, nothing for 64 bit. The header ehnet64.h #defines these:
+however, nothing for 64 bit. Depending upon the platform, various
+headers exist which implement similar 64 bit functions, but nothing as
+standard as arpa/inet.h. The header ehnet64.h aims to work on any
+platform and #defines these:
 
        uint64_t hton64(uint64_t host64);
        uint64_t ntoh64(uint64_t net64);
