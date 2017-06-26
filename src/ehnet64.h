@@ -45,27 +45,27 @@ extern "C" {
 #endif /* HAVE_BYTESWAP_H */
 
 #ifdef bswap_64
-#define ehnet64bswap_64(x) bswap_64(x)
+#define ehnet64_bswap_64(x) bswap_64(x)
 #else /* ifdef bswap_64 */
 #if HAVE_BSWAP_64
-#define ehnet64bswap_64(x) bswap_64(x)
+#define ehnet64_bswap_64(x) bswap_64(x)
 #endif /* HAVE_BSWAP_64 */
 #endif /* ifdef bswap_64 */
 
 #ifdef bswap_32
-#define ehnet64bswap_32(x) bswap_32(x)
+#define ehnet64_bswap_32(x) bswap_32(x)
 #else /* ifdef bswap_32 */
 #if HAVE_BSWAP_32
-#define ehnet64bswap_32(x) bswap_32(x)
+#define ehnet64_bswap_32(x) bswap_32(x)
 #endif /* HAVE_BSWAP_32 */
 #endif /* ifdef bswap_32 */
 
-#ifndef ehnet64bswap_32
+#ifndef ehnet64_bswap_32
 /* okay fine, we'll roll our own by hand */
-#define ehnet64bswap_32(x) \
+#define ehnet64_bswap_32(x) \
 	((((x) & 0xff000000) >> 24) | (((x) & 0x00ff0000) >>  8) | \
 	 (((x) & 0x0000ff00) <<  8) | (((x) & 0x000000ff) << 24))
-#endif /* ehnet64bswap_32 */
+#endif /* ehnet64_bswap_32 */
 
 #if HAVE_STDINT_H
 #include <inttypes.h>		/* uint64_t uint32_t */
@@ -75,17 +75,17 @@ extern "C" {
 #include <stdint.h>		/* uint64_t uint32_t */
 #endif /* HAVE_STDINT_H */
 
-#ifndef ehnet64bswap_64
-#define ehnet64bswap_64(x) \
-	((((uint64_t)ehnet64bswap_32((uint32_t)x) << 32) | \
-          ((uint64_t)ehnet64bswap_32((uint32_t)(x >> 32)))))
-#endif /* ehnet64bswap_64 */
+#ifndef ehnet64_bswap_64
+#define ehnet64_bswap_64(x) \
+	((((uint64_t)ehnet64_bswap_32((uint32_t)x) << 32) | \
+          ((uint64_t)ehnet64_bswap_32((uint32_t)(x >> 32)))))
+#endif /* ehnet64_bswap_64 */
 
-#define ehnet64_bigendian_host (ehnet64bswap_32(1U) == 1U)
+#define ehnet64_bigendian_host (ehnet64_bswap_32(1U) == 1U)
 
-#define hton64(x) (ehnet64_bigendian_host ? (uint64_t)x : ehnet64bswap_64(x))
+#define hton64(x) (ehnet64_bigendian_host ? (uint64_t)x : ehnet64_bswap_64(x))
 
-#define ntoh64(x) (ehnet64_bigendian_host ? (uint64_t)x : ehnet64bswap_64(x))
+#define ntoh64(x) (ehnet64_bigendian_host ? (uint64_t)x : ehnet64_bswap_64(x))
 
 #endif /* HAVE_ENDIAN_H */
 
