@@ -15,9 +15,10 @@ AC_PROG_CC
 AC_PROG_LN_S
 
 # Checks for header files.
-AC_CHECK_HEADERS([byteswap.h endian.h stdint.h])
+AC_CHECK_HEADERS([byteswap.h endian.h inttypes.h stdint.h])
 
 # Checks for library functions.
+# typically bswap_32 bswap_64 are #defined, not library functions
 AC_CHECK_FUNCS([bswap_32 bswap_64])
 
 AM_INIT_AUTOMAKE([subdir-objects -Werror -Wall])

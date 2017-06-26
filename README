@@ -30,16 +30,17 @@ Usage
 
 If using Autoconf, consider adding these to your configure.ac:
 
-AC_CHECK_HEADERS([byteswap.h endian.h stdint.h])
+AC_CHECK_HEADERS([byteswap.h endian.h inttypes.h stdint.h])
 AC_CHECK_FUNCS([bswap_32 bswap_64])
 
 If defining by hand, define the applicable of the following:
 
+#define HAVE_INTTYPES_H 1
 #define HAVE_STDINT_H 1
 #define HAVE_ENDIAN_H 1
 #define HAVE_BYTESWAP_H 1
-#define HAVE_BSWAP_32 1
-#define HAVE_BSWAP_64 1
+#define HAVE_BSWAP_32 1 /* not #defined actually a function */
+#define HAVE_BSWAP_64 1 /* not #defined actually a function */
 
 Finally, #include "ehnet64.h" into your source in order to make use of
 the functions "hton64" and "ntoh64" in your program.
