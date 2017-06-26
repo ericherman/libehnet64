@@ -44,20 +44,12 @@ extern "C" {
 #include <byteswap.h>
 #endif /* HAVE_BYTESWAP_H */
 
-#ifdef bswap_64
+#if (defined(bswap_64) || HAVE_BSWAP_64)
 #define ehnet64_bswap_64(x) bswap_64(x)
-#else /* ifdef bswap_64 */
-#if HAVE_BSWAP_64
-#define ehnet64_bswap_64(x) bswap_64(x)
-#endif /* HAVE_BSWAP_64 */
 #endif /* ifdef bswap_64 */
 
-#ifdef bswap_32
+#if (defined(bswap_32) || HAVE_BSWAP_32)
 #define ehnet64_bswap_32(x) bswap_32(x)
-#else /* ifdef bswap_32 */
-#if HAVE_BSWAP_32
-#define ehnet64_bswap_32(x) bswap_32(x)
-#endif /* HAVE_BSWAP_32 */
 #endif /* ifdef bswap_32 */
 
 #ifndef ehnet64_bswap_32
