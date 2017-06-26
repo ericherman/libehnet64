@@ -81,11 +81,11 @@ extern "C" {
           ((uint64_t)ehnet64bswap_32((uint32_t)(x >> 32)))))
 #endif /* ehnet64bswap_64 */
 
-#define hton64(x) ((ehnet64bswap_32(1U) == 1U) ? (uint64_t)x : \
-	ehnet64bswap_64(x))
+#define ehnet64_bigendian_host (ehnet64bswap_32(1U) == 1U)
 
-#define ntoh64(x) ((ehnet64bswap_32(1U) == 1U) ? (uint64_t)x : \
-	ehnet64bswap_64(x))
+#define hton64(x) (ehnet64_bigendian_host ? (uint64_t)x : ehnet64bswap_64(x))
+
+#define ntoh64(x) (ehnet64_bigendian_host ? (uint64_t)x : ehnet64bswap_64(x))
 
 #endif /* HAVE_ENDIAN_H */
 
