@@ -13,7 +13,7 @@
 
 # typical builds:
 #CSTD_CFLAGS=-std=c89
-DEBUG_CFLAGS=-ggdb -O2 -fomit-frame-pointer
+DEBUG_CFLAGS=-ggdb -O2 -pipe -fomit-frame-pointer
 NOISY_CFLAGS=-Wall -Wextra -pedantic -Werror
 # if debugging, these flags may be better:
 # CSTD_CFLAGS=-std=gnu11
