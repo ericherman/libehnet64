@@ -28,25 +28,55 @@ union endian_test_u {
 
 int main(int argc, char **argv)
 {
-	union endian_test_u as_le, as_be;
-	uint64_t val, hostv, actual;
+	union endian_test_u litend, bigend;
+	uint64_t val, hostv, result;
 	size_t i;
+	int verbose;
 	char *end;
 
-	val = (argc > 1) ? strtoull(argv[1], &end, 10) : 0x1122334455667788ULL;
+	verbose = (argc > 1) ? atoi(argv[1]) : 0;
+	val = (argc > 2) ? strtoull(argv[2], &end, 10) : 0x1122334455667788ULL;
 
-	for (i = 0; i < 8; ++i) {
-		as_le.bytes[i] = ((val & (0xFFULL << (8 * i))) >> (8 * i));
-		as_be.bytes[7 - i] = as_le.bytes[i];
+	if (verbose) {
+		printf("value  = %016llx (%llu)\n", (unsigned long long)val,
+		       (unsigned long long)val);
 	}
 
-	hostv = (as_be.n == val) ? as_be.n : as_le.n;
+	for (i = 0; i < 8; ++i) {
+		litend.bytes[i] = ((val & (0xFFULL << (8 * i))) >> (8 * i));
+		bigend.bytes[7 - i] = litend.bytes[i];
+	}
 
-	actual = ntoh64(as_be.n);
+	if (verbose) {
+		printf("litend = %016llx (%llu)\n",
+		       (unsigned long long)litend.n,
+		       (unsigned long long)litend.n);
+	}
+	if (verbose) {
+		printf("bigend = %016llx (%llu)\n",
+		       (unsigned long long)bigend.n,
+		       (unsigned long long)bigend.n);
+	}
 
-	if (actual != hostv) {
-		fprintf(stderr, "%0llx = ntoh64(%0llx), expected: %0llx\n",
-			(unsigned long long)actual, (unsigned long long)as_be.n,
+	hostv = (bigend.n == val) ? bigend.n : litend.n;
+
+	if (verbose) {
+		printf("host v = %016llx (%llu)\n", (unsigned long long)hostv,
+		       (unsigned long long)hostv);
+	}
+
+	result = ntoh64(bigend.n);
+	if (verbose) {
+		printf("result = ntoh64(%016llx)\n",
+		       (unsigned long long)bigend.n);
+		printf("result = %016llx (%llu)\n", (unsigned long long)result,
+		       (unsigned long long)result);
+	}
+
+	if (result != hostv) {
+		fprintf(stderr, "%0llx = ntoh64(%016llx), expected: %016llx\n",
+			(unsigned long long)result,
+			(unsigned long long)bigend.n,
 			(unsigned long long)hostv);
 		return EXIT_FAILURE;
 	}
