@@ -1,3 +1,8 @@
+libehnet64: Easy Host-Network 64
+------------------------------
+multi-platfrom 64-bit versions of functions to convert between network and host byte orders
+
+
 hton64 and ntoh64
 -----------------
 64-bit function to convert between network and host byte order
