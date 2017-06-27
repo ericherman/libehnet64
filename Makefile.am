@@ -13,7 +13,7 @@
 
 # typical builds:
 #CSTD_CFLAGS=-std=c89
-DEBUG_CFLAGS=-ggdb -O2 -pipe -fomit-frame-pointer
+DEBUG_CFLAGS=-ggdb -O2 -fomit-frame-pointer
 NOISY_CFLAGS=-Wall -Wextra -pedantic -Werror
 # if debugging, these flags may be better:
 # CSTD_CFLAGS=-std=gnu11
@@ -30,7 +30,7 @@ ACLOCAL_AMFLAGS=-I m4 --install
 
 EXTRA_DIST=COPYING.GPL3 misc
 
-AM_CFLAGS=$(CSTD_CFLAGS) $(DEBUG_CFLAGS) $(NOISY_CFLAGS)
+AM_CFLAGS=$(CSTD_CFLAGS) $(DEBUG_CFLAGS) $(NOISY_CFLAGS) -pipe
 
 # extracted from https://github.com/torvalds/linux/blob/master/scripts/Lindent
 LINDENT=indent -npro -kr -i8 -ts8 -sob -l80 -ss -ncs -cp1 -il0
